@@ -9,7 +9,7 @@ export class PostagemService {
   constructor(
     @InjectRepository(Postagem)
     private postagemRepository: Repository<Postagem>,
-    private TenaService: TemaService,
+    private TemaService: TemaService,
   ) {}
 
   async findAll(): Promise<Postagem[]> {
@@ -49,7 +49,7 @@ export class PostagemService {
   }
 
   async create(postagem: Postagem): Promise<Postagem> {
-    await this.TenaService.findById(postagem.tema.id);
+    await this.TemaService.findById(postagem.tema.id);
 
     return await this.postagemRepository.save(postagem);
   }
@@ -57,7 +57,7 @@ export class PostagemService {
   async update(postagem: Postagem): Promise<Postagem> {
     await this.findById(postagem.id);
 
-    await this.TenaService.findById(postagem.tema.id);
+    await this.TemaService.findById(postagem.tema.id);
 
     return await this.postagemRepository.save(postagem);
   }
